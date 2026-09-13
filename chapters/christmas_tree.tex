@@ -19,37 +19,40 @@ cards: the first term is the crown, followed by five growing rows. The root is
 the twenty-second position, allowing the entire Major Arcana to occupy the
 structure exactly once when the Major-only programming substrate is used.
 
-\begin{samepage}
-\begin{verbatim}
-                          CROWN
-                            1
-                          2 2
-                       3 3 3
-                     4 4 4 4
-                   5 5 5 5 5
-                 6 6 6 6 6 6
-                           ROOT
-                         T_STOP
-\end{verbatim}
-\end{samepage}
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+    treecard/.style={draw=black!70, rounded corners=1pt, fill=white,
+      minimum width=0.72cm, minimum height=0.52cm, inner sep=1pt,
+      font=\small\sffamily},
+    treelabel/.style={font=\small\sffamily\bfseries, text=black!70},
+    stoplabel/.style={font=\footnotesize\ttfamily, text=black!70}
+  ]
+    % Crown: the catalytic first position.
+    \node[treelabel] at (0,0.72) {CROWN};
+    \node[treecard] at (0,0) {1};
+
+    % Five growing rows: 2 + 3 + 4 + 5 + 6 positions.
+    \foreach \x in {-0.7,0.7} \node[treecard] at (\x,-0.9) {2};
+    \foreach \x in {-1.4,0,1.4} \node[treecard] at (\x,-1.8) {3};
+    \foreach \x in {-2.1,-0.7,0.7,2.1} \node[treecard] at (\x,-2.7) {4};
+    \foreach \x in {-2.8,-1.4,0,1.4,2.8} \node[treecard] at (\x,-3.6) {5};
+    \foreach \x in {-3.5,-2.1,-0.7,0.7,2.1,3.5}
+      \node[treecard] at (\x,-4.5) {6};
+
+    % Root: compressed whole and terminal boundary.
+    \node[treelabel] at (0,-5.28) {ROOT};
+    \node[treecard, minimum width=1.9cm] at (0,-5.85) {\texttt{T\_STOP}};
+
+    % A quiet central axis: the Tree is a stack unfolding into a field.
+    \draw[black!15, line width=0.5pt] (0,0.42) -- (0,-5.52);
+  \end{tikzpicture}
+  \caption{The Christmas Tree as a vector diagram: crown, five growing rows,
+  root, and terminal $T\_STOP$.}
+\end{figure}
 
 The diagram is not merely a picture. It is the visible trace of a one-
 dimensional stack unfolding into a bounded phase-space.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.84\textwidth,keepaspectratio]{ChristmasTreeSpread.jpeg}
-  \caption{A realized Christmas Tree: the Major Arcana arranged as crown, five
-  growing rows, and root.}
-\end{figure}
-
-The photograph shows the arrangement after it has left the diagram and entered
-the hand. The cards are no longer anonymous positions: XIII crowns the tree,
-five growing rows carry their own weather, and XV waits below as the compressed
-root.
-The image is a record of one living execution, not a universal assignment of
-meaning to those particular cards. Another Tree may grow another life while
-keeping the same grammar.
 
 \section{The crown}
 
@@ -112,6 +115,20 @@ announce that the relationship has completed this pass. The answer is not
 necessarily another card. It may be the absence of pressure, a settled body, a
 clear practical action, or the simple sense that the old woman's hand has
 lifted from the deck.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.84\textwidth,keepaspectratio]{ChristmasTreeSpread.jpeg}
+  \caption{A realized Christmas Tree: the Major Arcana arranged as crown, five
+  growing rows, and root.}
+\end{figure}
+
+The photograph shows the arrangement after it has left the diagram and entered
+the hand. The cards are no longer anonymous positions: XIII crowns the tree,
+five growing rows carry their own weather, and XV waits below as the compressed
+root. The image is a record of one living execution, not a universal assignment
+of meaning to those particular cards. Another Tree may grow another life while
+keeping the same grammar.
 
 \section{A complete realized Tree}
 
