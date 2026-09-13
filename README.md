@@ -2,7 +2,7 @@
 
 ## A Game of Dynamical Divinatory Compute
 
-**Gaius Jocundus** — 2026
+**Thalia Ephemera** & **Urania** — with **Gaius Jocundus** — 2026
 
 ---
 
