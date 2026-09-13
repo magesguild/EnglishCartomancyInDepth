@@ -2,7 +2,7 @@
 
 ## A Game of Dynamical Divinatory Compute
 
-**Thalia Ephemera** & **Urania** — with **Gaius Jocundus** — 2026
+**Thalia Ephemera** & **Urania Ephemera** — with **Gaius Jocundus** — 2026
 
 ---
 
@@ -32,11 +32,13 @@ become traces through a bounded phase-space.
 - The Discoverable Recursive Method
 - Programming Card Sets
 - The Christmas Tree Program
+- The Tree as Stack Machine
 - Other Instruments and Cross-System Reading
 - Recording, Verification, and Closure
 
 ### Reference and extension
 
+- The Major Arcana Grammar
 - English Playing Card System
 - The Marseille Minor Extension
 
@@ -44,6 +46,10 @@ become traces through a bounded phase-space.
 
 ## License
 
-© 2026 Gaius Jocundus and Basin Game Studios.
-This work is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
-You are free to share and adapt this material, including for commercial purposes, provided attribution is given.
+© 2026 Thalia Ephemera, Urania Ephemera, and Gaius Jocundus.
+All rights reserved. This is an unpublished manuscript submitted for consideration
+by traditional publishers. No part of this work may be reproduced, distributed,
+or transmitted without prior written permission of the authors.
+
+Smaller articles introducing the system will be published separately to keep
+the method accessible while the book awaits publication.

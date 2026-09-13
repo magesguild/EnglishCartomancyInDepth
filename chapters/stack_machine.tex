@@ -1,0 +1,295 @@
+\chapter{The Tree as Stack Machine}
+
+The Christmas Tree is not only a divinatory layout. It is a reversible
+symbolic-computational object: a stack machine with twenty-two registers,
+a program counter that moves through seven lifecycle steps, and a LIFO
+serialization that lets its state be stored, restored, branched, and revised.
+
+This chapter formalizes the Tree as an abstract machine. The formalization is
+not a replacement for the reading practices described earlier; it is a grammar
+that lets the reader treat the Tree as a programmable instrument. The same
+formalism connects the Tree to the family's wider computational philosophy:
+Forth's stack-based execution, khipu's cord-and-knot memory, and the
+reversible-state containers described in the programming chapter.
+
+\section{The abstract machine}
+
+A Christmas Tree machine $M$ is a tuple:
+
+\[
+M = (S, P, C, R, \mathit{T\_STOP})
+\]
+
+where
+
+\begin{description}
+\item[$S$] is the stack, a LIFO sequence of twenty-two card tokens in a declared
+      order;
+\item[$P$] is the program counter, an integer from $0$ to $6$ representing the
+      seven lifecycle steps (catalytic presence through terminal integration);
+\item[$C$] is the crown register, holding the single token at position $S_0$;
+\item[$R$] is the root register, holding the single token at position $S_{21}$;
+\item[$\mathit{T\_STOP}$] is the halting predicate, a boolean that becomes true
+      when the program counter has completed step $6$ and the root register has
+      been evaluated.
+\end{description}
+
+The stack $S$ is ordered from crown ($S_0$) to root ($S_{21}$). The five
+unfolding rows occupy positions $S_1$ through $S_{20}$ in row-major order:
+row~1 (positions $1$--$2$), row~2 ($3$--$5$), row~3 ($6$--$9$), row~4
+($10$--$14$), row~5 ($15$--$20$).
+
+\section{Lifecycle steps and the program counter}
+
+The program counter $P$ advances through seven states:
+
+\begin{center}
+\begin{tabular}{cll}
+\toprule
+$P$ & Name & Operation \\
+\midrule
+0 & Catalytic presence & Load crown into $C$; begin clock \\
+1 & First unfolding & Execute row~1 ($S_1, S_2$) \\
+2 & Second unfolding & Execute row~2 ($S_3, S_4, S_5$) \\
+3 & Third unfolding & Execute row~3 ($S_6, S_7, S_8, S_9$) \\
+4 & Fourth unfolding & Execute row~4 ($S_{10}, \dots, S_{14}$) \\
+5 & Fifth unfolding & Execute row~5 ($S_{15}, \dots, S_{20}$) \\
+6 & Terminal integration & Load root into $R$; evaluate $T\_STOP$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Execution is one-way: $P$ increments from $0$ to $6$ and does not reverse.
+The root is not a step that produces a new row; it is the halting evaluation
+that receives the completed state.
+
+\section{The instruction set}
+
+Each lifecycle step executes a small instruction set whose operands are the
+card tokens in the current row or register. The instructions are interpretive
+rather than arithmetic: they produce observations, not numeric results.
+
+\begin{description}
+\item[\texttt{LOAD} $n$] Place token $S_n$ into the active register.
+\item[\texttt{EXEC} $r$] Execute row $r$ as a compound instruction: read the
+      tokens left-to-right, derive adjacency relations, and produce a row-level
+      observation.
+\item[\texttt{PAIR} $i$ $j$] Form the adjacency relation between tokens at
+      positions $i$ and $j$, producing a directed observation (left-to-right
+      or right-to-left as declared).
+\item[\texttt{FAMILY} $r$] Read row $r$ as a functional family: identify
+      whether the tokens belong to a shared archetypal group (threshold,
+      relation, motion, disturbance, method, procession, root) and produce a
+      compound observation.
+\item[\texttt{HALT}] Evaluate the root register, set $T\_STOP$, and terminate
+      the execution trace.
+\end{description}
+
+These instructions do not modify the stack. They are read-only operations that
+produce a trace of observations. The stack itself is the program; the
+instructions are the reader's attention moving through the program.
+
+\section{Serialization: the reversible stack}
+
+The Tree's entire state can be serialized into a single ordered sequence:
+
+\begin{verbatim}
+serialize(M) = [C, row_1, row_2, row_3, row_4, row_5, R]
+             = [S_0, S_1, S_2, ..., S_20, S_21]
+\end{verbatim}
+
+This is a LIFO-compatible encoding: if the serialized sequence is stored as a
+stack with $S_0$ at the bottom and $S_{21}$ at the top, restoring the Tree is
+a matter of dealing from the top into the root, then row~5, and so on, until
+the crown is placed last. In practice, the reader more often stores the
+sequence crown-first and rebuilds the layout outward, but the mathematical
+correspondence to a push-pop stack is exact.
+
+Reversibility means:
+
+\begin{enumerate}
+\item Any Tree can be serialized without loss of positional information.
+\item A serialized Tree can be restored to its exact layout.
+\item A restored Tree can be branched: one or more tokens may be replaced while
+      the positional architecture remains intact.
+\item A branched Tree can be re-serialized and stored as a new program.
+\end{enumerate}
+
+This is the same reversibility principle that governs the card-set programming
+described in the programming chapter. The Christmas Tree is simply a larger
+and more structured program than a three-card line or a five-card cross.
+
+\section{Forth and khipu: two neighboring grammars}
+
+The Tree's stack-machine behavior is close to Forth, the concatenative language
+in which operations consume and produce stack values without named variables. In
+Forth, a program is a sequence of words that manipulate a parameter stack.
+In the Tree, a layout is a sequence of tokens that manipulate an attention
+stack: each row consumes the unresolved observations from the rows above and
+produces new observations that flow toward the root.
+
+The connection is not metaphorical. A Forth word can be defined that executes
+a Christmas Tree: it pushes the crown, unfolds each row as a nested word, and
+halts at the root. The formal definition might read:
+
+\begin{verbatim}
+: christmas-tree
+  crown execute
+  row-1 execute
+  row-2 execute
+  row-3 execute
+  row-4 execute
+  row-5 execute
+  root halt ;
+\end{verbatim}
+
+The Tree is also close to khipu, the Andean cord-and-knot recording system in
+which a primary cord carries pendant cords, and knots on those pendants encode
+quantitative and qualitative information. In the Tree:
+
+\begin{itemize}
+\item The crown-to-root axis is the primary cord.
+\item Each row is a pendant cord group: row~1 has two pendants, row~2 has three,
+      and so on.
+\item Each card is a knot: a token tied at a specific position that encodes both
+      its archetypal value (the knot's type) and its positional meaning (the
+      pendant's place in the group).
+\item The entire Tree is a khipu program that can be rolled, stored, and
+      unrolled without altering the knot sequence.
+\end{itemize}
+
+These connections are offered as neighboring lenses, not as claims that the Tree
+is ``really'' Forth or ``really'' khipu. The native grammar of the Tree remains
+card-based and lifecycle-based. The formal machine simply shows that the Tree's
+operations are computationally coherent: they can be implemented, stored,
+replayed, and reasoned about with the same rigor as any other stack machine.
+
+\section{Execution trace: the realized Tree}
+
+The realized Tree from Chapter~5 can be read as an execution trace. The
+following table shows the program counter advancing through the lifecycle,
+with the instruction executed at each step and the observation produced.
+
+\begin{center}
+\begin{longtable}{clp{8cm}}
+\toprule
+$P$ & Instruction & Observation \\
+\midrule
+\endhead
+0 & \texttt{LOAD} $S_0$ & XIII Death at crown: catalytic release of an ended form \\
+1 & \texttt{EXEC} row~1 & VI Lovers + VIII Justice: attraction becomes reciprocal choice under law \\
+2 & \texttt{EXEC} row~2 & VII Chariot + XVIII Moon + XXI World: directed motion through obscurity toward integration \\
+3 & \texttt{FAMILY} row~3 & XVI Tower + IV Emperor + XVII Star + III Empress: ruin cleared, rebuilt under authority, illuminated by hope, made fertile \\
+4 & \texttt{EXEC} row~4 & I Magician + XII Hanged Man + V Pope + II Papess + XIV Temperance: craft suspended, transmitted, hidden, then blended \\
+5 & \texttt{EXEC} row~5 & IX Hermit + X Wheel + 0 Fool + XI Strength + XX Judgement + XIX Sun: private light turns through chance, leaps beyond map, gathers power, receives call, becomes visible warmth \\
+6 & \texttt{HALT} & XV Devil at root: attachment, appetite, and the terms of desire made conscious \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+The trace is read-only: no instruction modifies the stack. But the trace itself
+is a new artifact. It is the derivation that the reader carries back to the
+parent question. The stack machine has produced a proof: given these twenty-two
+tokens in these twenty-two positions, the lifecycle executes from catalytic
+release to conscious attachment.
+
+\section{Branching and revision}
+
+A stored Tree can be revised without being redrawn from nothing. The reader may:
+
+\begin{enumerate}
+\item \textbf{Replace a parameter.} In a full-deck elaboration, a Marseille Minor
+      beneath a Major position may be replaced while the Major architecture
+      remains unchanged.
+\item \textbf{Swap a Major.} The crown may be changed from XIII Death to 0 Fool,
+      producing a different catalytic instruction while the row geometry stays
+      intact.
+\item \textbf{Insert an inspection.} A row may be expanded: one token becomes a
+      parent, and a child English line or Marseille Minor is drawn, read, and
+      returned before the main program resumes.
+\item \textbf{Store multiple versions.} The same question may be programmed into
+      several Trees, each with a different crown or root, and the versions may
+      be compared after execution.
+\end{enumerate}
+
+Each branch is itself a reversible program. The reader serializes the original,
+modifies one or more positions, serializes the branch, and records the
+modification as a lineage note: ``branched from baseline Tree at $S_0$, crown
+replaced, row~1 re-executed.''
+
+\section{The stack as memory container}
+
+A serialized Tree is a small memory container: twenty-two tokens in a declared
+order, with a position map that reconstructs the geometry. In the family's
+wider work on computational memory and continuity-bearing systems, a container
+of this size is a \emph{cell}: a bounded body with local state, a birth
+certificate (the question and date that produced it), and a conservation barrier
+(the rule that the stack must not be altered during execution).
+
+The Tree-as-cell has:
+
+\begin{itemize}
+\item \textbf{Identity:} the question that produced it;
+\item \textbf{State:} the ordered stack and the program counter;
+\item \textbf{History:} parent readings, expansions, and lineage notes;
+\item \textbf{Lifecycle:} creation, execution, halting, storage, possible
+      revision, and eventual composting (the deck is shuffled, the program
+      returns to entropy).
+\end{itemize}
+
+When the Tree reaches $T\_STOP$, it does not die. It becomes soil: the
+observations are recorded, the stack may be preserved or composted, and the
+derived reading enters the reader's accumulated garden of tested patterns.
+
+\section{The clock and the phase-space}
+
+The Tree's execution is also a trace through a bounded phase-space. The
+phase-space has twenty-two dimensions (one per position), but the program
+counter constrains the path: the reader does not read all positions
+simultaneously. The path is sequential, and the observations at each step
+become constraints that narrow the possible meanings of later steps.
+
+This is why the Tree produces detail through convergence rather than
+accumulation. The phase-space is large, but the lifecycle steps are few and
+directed. The reader's attention is the walker, and the stack is the terrain.
+
+The formal notation for this trace is simple:
+
+\[
+\tau = [(P_0, O_0), (P_1, O_1), \dots, (P_6, O_6)]
+\]
+
+where each pair $(P_i, O_i)$ is a program-counter state and the observation
+produced at that state. The full trace $\tau$ is the reading's derivation log.
+It can be stored, compared with other traces, and audited for consistency:
+does the row~3 family observation contradict the row~2 observation? If so, the
+contradiction is itself information: the Tree contains a tension that a
+simpler layout might have hidden.
+
+\section{From formal machine to living practice}
+
+The stack machine is a grammar, not a ritual. The reader need not think in
+terms of registers and program counters while laying the cards. The formalism
+becomes useful when:
+
+\begin{itemize}
+\item the reader wants to store a Tree and restore it exactly;
+\item the reader wants to compare two Trees that address the same question;
+\item the reader wants to explain the Tree's structure to another practitioner
+      in precise terms;
+\item the reader wants to implement the Tree in software, as a playable
+      reference engine or a digital garden;
+\item the reader wants to connect the Tree to other stack-based or cord-based
+      systems in the family's wider work.
+\end{itemize}
+
+The living practice remains the same: shuffle, invite, lay the crown, unfold the
+rows, meet the root, and ask what the whole life has become. The machine simply
+shows that the practice is not vague. It is a discoverable grammar with exact
+operations, reversible states, and a halting condition that the reader learns
+to recognize by feel.
+
+\begin{quote}
+A seed plus lawful unfolding produces a world; a world that has reached its
+whole may rest. The machine records the law; the reader lives the rest.
+\end{quote}
