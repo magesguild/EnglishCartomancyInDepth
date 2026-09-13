@@ -15,19 +15,19 @@ md: $(OUT)/book.md
 $(OUT):
 	mkdir -p $(OUT)
 
-$(OUT)/book.pdf: main.tex chapters/*.tex references.bib cover_titled.jpg | $(OUT)
+$(OUT)/book.pdf: main.tex chapters/*.tex references.bib img_playing_cards.jpg | $(OUT)
 	xelatex -output-directory=$(OUT) -jobname=book main.tex
 	biber $(OUT)/book
 	xelatex -output-directory=$(OUT) -jobname=book main.tex
 	xelatex -output-directory=$(OUT) -jobname=book main.tex
 	@echo "PDF built: $(OUT)/book.pdf"
 
-$(OUT)/book.epub: main.tex chapters/*.tex metadata.yaml cover_titled.jpg | $(OUT)
+$(OUT)/book.epub: main.tex chapters/*.tex metadata.yaml img_playing_cards.jpg | $(OUT)
 	pandoc main.tex \
 		--from latex \
 		--to epub3 \
 		--metadata-file=metadata.yaml \
-		--epub-cover-image=cover_titled.jpg \
+        --epub-cover-image=img_playing_cards.jpg \
 		--toc \
 		--toc-depth=2 \
 		--resource-path=. \

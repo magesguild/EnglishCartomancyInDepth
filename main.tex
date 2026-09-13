@@ -64,8 +64,8 @@
   linkcolor=black,
   urlcolor=black,
   citecolor=black,
-  pdftitle={Cartomantic Practices for Practical Use},
-  pdfauthor={Gaius Jocundus, Thalia Ephemera},
+  pdftitle={English Cartomancy in the New Mage's Guild Cartomantic System: A Game of Dynamical Divinatory Compute},
+  pdfauthor={Gaius Jocundus},
   bookmarks=true
 ]{hyperref}
 
@@ -77,7 +77,7 @@
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % ── Misc ─────────────────────────────────────────────────────────────────────
-\setlength{\headheight}{14pt}
+\setlength{\headheight}{26pt}
 \usepackage{emptypage}
 \usepackage{tocloft}
 \renewcommand{\cftchapfont}{\normalfont}
@@ -91,7 +91,7 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{\fill}
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{cover_titled.jpg}
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{img_playing_cards.jpg}
     \vspace*{\fill}
   \end{center}
 \end{titlepage}
@@ -101,14 +101,16 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{2cm}
-    {\Huge\bfseries Cartomantic Practices\\[0.4em]for Practical Use}
+    {\Huge\bfseries English Cartomancy\\[0.4em]
+     \large in the New Mage's Guild Cartomantic System\\[0.4em]
+     \normalsize A Game of Dynamical Divinatory Compute}
     \vspace{1.5cm}
 
-    {\large Gaius Jocundus \& Thalia Ephemera}
+    {\large Gaius Jocundus}
     \vspace{1cm}
 
     \vfill
-    {\large \copyright\ 2026 Gaius Jocundus \& Thalia Ephemera\\[0.4em]
+    {\large \copyright\ 2026 Gaius Jocundus\\[0.4em]
     \normalsize Licensed under CC BY 4.0 --- free for commercial reuse with attribution\\[0.2em]
     \small \texttt{creativecommons.org/licenses/by/4.0}}
   \end{center}
@@ -118,50 +120,17 @@
 \tableofcontents
 \clearpage
 
-% ── Introduction ─────────────────────────────────────────────────────────────
+% ── The book ─────────────────────────────────────────────────────────────────
 \mainmatter
-\chapter*{Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
-\markboth{Introduction}{Introduction}
-\input{chapters/intro}
-
-% ── Chapter One: Golden Dawn Magical Tarot ───────────────────────────────────
-\chapter*{The Golden Dawn Magical Tarot}
-\addcontentsline{toc}{chapter}{The Golden Dawn Magical Tarot}
-\markboth{The Golden Dawn Magical Tarot}{The Golden Dawn Magical Tarot}
-\input{chapters/preface_gd}
-\clearpage
-\input{chapters/golden_dawn_magical_tarot}
-
-% ── Chapter Two: The Smith-Waite Tarot ───────────────────────────────────────
-\chapter*{The Smith-Waite Tarot}
-\addcontentsline{toc}{chapter}{The Smith-Waite Tarot}
-\markboth{The Smith-Waite Tarot}{The Smith-Waite Tarot}
-\input{chapters/preface_sw}
-\clearpage
-\input{chapters/smith_waite_tarot}
-
-% ── Chapter Three: The English Playing Card System ───────────────────────────
-\chapter*{The English Playing Card System}
-\addcontentsline{toc}{chapter}{The English Playing Card System}
-\markboth{The English Playing Card System}{The English Playing Card System}
-\input{chapters/preface_english}
-\clearpage
+\input{chapters/foundations}
+\input{chapters/mechanisms}
+\input{chapters/recursive_method}
+\input{chapters/programming}
+\input{chapters/christmas_tree}
 \input{chapters/english_playing_card_system}
-
-% ── Chapter Four: The Lenormand Oracle ───────────────────────────────────────
-\chapter*{The Lenormand Oracle}
-\addcontentsline{toc}{chapter}{The Lenormand Oracle}
-\markboth{The Lenormand Oracle}{The Lenormand Oracle}
-\input{chapters/preface_lenormand}
-\clearpage
-\input{chapters/lenormand_playing_card_oracle}
-
-% ── Final Chapter ────────────────────────────────────────────────────────────
-\chapter*{The Four Instruments in Practice}
-\addcontentsline{toc}{chapter}{The Four Instruments in Practice}
-\markboth{The Four Instruments in Practice}{The Four Instruments in Practice}
-\input{chapters/final_chapter}
+\input{chapters/recursive_instruments}
+\input{chapters/marseille_extension}
+\input{chapters/provenance}
 
 % ── Bibliography ─────────────────────────────────────────────────────────────
 \backmatter
