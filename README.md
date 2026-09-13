@@ -44,6 +44,6 @@ become traces through a bounded phase-space.
 
 ## License
 
-© 2026 Gaius Jocundus.
+© 2026 Gaius Jocundus and Basin Game Studios.
 This work is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
 You are free to share and adapt this material, including for commercial purposes, provided attribution is given.
